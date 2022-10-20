@@ -1,5 +1,8 @@
 package com.mrvw.bookstore.resources;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mrvw.bookstore.domain.Tecnico;
 import com.mrvw.bookstore.domain.dtos.TecnicoDTO;
 import com.mrvw.bookstore.services.TecnicoService;
+
 
 @RestController
 @RequestMapping(value = "/tecnicos")
@@ -23,5 +27,13 @@ public class TecnicoResource {
 		Tecnico obj = service.findById(id);
 		return ResponseEntity.ok().body(new TecnicoDTO(obj));
 	}
+	
+	@GetMapping
+	public ResponseEntity<List<TecnicoDTO>> findAll(){
+		List<Tecnico> list = service.findAll();
+		List<TecnicoDTO> listDTO = list.stream().map(obj -> new TecnicoDTO()).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDTO);
+	}
+	
 
 }

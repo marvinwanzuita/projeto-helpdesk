@@ -21,7 +21,6 @@ import com.mrvw.bookstore.enums.Perfil;
 
 @Entity
 public abstract class Pessoa implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 	
 	@Id
